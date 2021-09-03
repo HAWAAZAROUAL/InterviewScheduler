@@ -143,12 +143,10 @@ storiesOf("Button", module)
         })
         .add("Appointment", () => <Appointment />);
         .add("Appointment with Time", () => <Appointment time="12pm" />);
-        // header component
-        .add("Header", () => <Header time="12pm");
-        // Empty component
+        .add("Header", () => <Header time="12pm"/>);
         .add("Empty", () => <Empty onAdd={action("onAdd")}/>)
-        // show component
-        .add("Show", () => <Show student="Lydia Miller-Jones"/>)
-        .add("Show", () => <Show interviewer={interviewer}/>)
-        .add("Show", () => <Show onEdit={action("onEdit")}/>)
-        .add("Show", () => <Show onDelete={action("onDelete")}/>)
+        .add("Show", () => <Show 
+        student="Lydia Miller-Jones"
+        interviewer={interviewer}
+        onEdit={action("onEdit")}
+        onDelete={action("onDelete")} />)

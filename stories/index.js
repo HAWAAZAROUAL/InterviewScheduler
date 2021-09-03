@@ -4,14 +4,16 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import "index.scss";
+// import "./styles.scss";
 import DayListItem from "components/DayListItem.js";
 import DayList from "components/DayList.js";
 import Button from "components/Button";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
-import Appointment from "components/Appointment/index";
+import Appointment from "components/Appointment";
 import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
+import Show from "components/Appointment/Show";
 
 storiesOf("Button", module)
   .addParameters({
@@ -139,9 +141,14 @@ storiesOf("Button", module)
         .addParameters({
           backgrounds: [{ name: "white", value: "#fff", default: true }]
         })
-        .add("Appointment", () => <Appointment />)
+        .add("Appointment", () => <Appointment />);
         .add("Appointment with Time", () => <Appointment time="12pm" />);
         // header component
         .add("Header", () => <Header time="12pm");
         // Empty component
         .add("Empty", () => <Empty onAdd={action("onAdd")}/>)
+        // show component
+        .add("Show", () => <Show student="Lydia Miller-Jones"/>)
+        .add("Show", () => <Show interviewer={interviewer}/>)
+        .add("Show", () => <Show onEdit={action("onEdit")}/>)
+        .add("Show", () => <Show onDelete={action("onDelete")}/>)

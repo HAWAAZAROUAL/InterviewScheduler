@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 // import classnames from "classnames";
 import "./InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
@@ -15,6 +16,10 @@ export default function InterviewerList(props) {
         setInterviewer={() => props.setInterviewer(interviewer)}
       />
     )
+
+    InterviewerList.propTypes = {
+      interviewers: PropTypes.array.isRequired
+    };
   });
 
   return (
@@ -25,19 +30,4 @@ export default function InterviewerList(props) {
   )
 }
 
-// const classnames = require("classnames");
-
-// const {interviewers, interviewer, setInterviewer} = props;
-
-// not sure if this is right....
-// const interviewerListItems = props.interviewers && props.interviewers.map(interviewer => {
-//   return (
-//     <InterviewerListItem 
-//       key={interviewer.id}
-//       name={interviewer.name}
-//   avatar={interviewer.avatar}
-//   selected={interviewer.id === props.interviewer}
-//   setInterviewer={() => props.setInterviewer(interviewer.id)}
-//   />
-// )
-// });
+// export default InterviewerList;

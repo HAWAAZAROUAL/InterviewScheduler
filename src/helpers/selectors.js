@@ -20,4 +20,32 @@ const dailyAppointments = [];
     return dailyAppointments; 
 };
 
-export {getAppointmentsForDay};
+function getInterview(state, interview) {
+  if(interview) {
+
+    return {
+      student: interview.student,
+      interviewer: {...state.interviewers[interview.interviewer]}
+    }
+  }
+  return null;
+}
+
+function getInterviewersForDay(state, dayName) {
+
+  const interviewers = [];
+  state.days.forEach(day => {
+
+    if (day.name === dayName) {
+
+      day.interviewers.forEach(interviewer => {
+
+          interviewers.push(state.interviewers[interviewer]);
+      });
+    }
+  });
+  console.log('interviewers: ', interviewers);
+    return interviewers; 
+};
+
+export {getAppointmentsForDay, getInterview, getInterviewersForDay};

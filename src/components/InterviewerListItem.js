@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-// import {useState} from 'react';
+import React from 'react';
 import "./InterviewerListItem.scss";
 import classnames from "classnames";
+
 
 export default function InterviewerListItem(props) {
 

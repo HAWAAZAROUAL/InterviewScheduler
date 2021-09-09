@@ -28,3 +28,14 @@ return (
 </li>
   );
 }
+
+
+// const updateSpots = function (state, appointments) {
+
+//   //get the days
+//   //calculate the spots
+//   // update the day
+//   // put day in days array
+//   //  return days array
+//   return []
+// }

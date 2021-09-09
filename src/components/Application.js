@@ -20,6 +20,11 @@ export default function Application(props) {
     appointments: {},
     interviewers: {}
   });
+
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  // needs to be above application component
+  const setDay = day => setState({ ...state, day});
+
   
   
   // request days data from /api/days
@@ -28,7 +33,7 @@ export default function Application(props) {
       axios.get('/api/days'),
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
-    ]).then((response) => {
+    ]).then(response => {
       setState(prev => {
         return {
           ...prev,
@@ -39,14 +44,6 @@ export default function Application(props) {
       });
     }).catch(response => console.log('Error: ', response.message));
   }, []);
-  
-const dailyAppointments = getAppointmentsForDay(state, state.day);
-
-  // needs to be above application component
-  const setDay = day => setState({ ...state, day});
-
-  // setDays function in application component- should update days state
-  // const setDays = days => setState(prev => ({...prev, days}));
 
   function bookInterview(id, interview) {
     const appointment = {
@@ -57,22 +54,44 @@ const dailyAppointments = getAppointmentsForDay(state, state.day);
       ...state.appointments,
       [id]: appointment
     };
-    return axios.put(`/api/appointments/${id}`, interview)
-      .then(res => {
-        setState({...state, appointments})
-        return res;
-      })
-      .catch((error) => {
-        console.log(error.response)
-        return null;
-      })
+
+    return axios.put(`/api/appointments/${id}`, {interview})
+      .then(() => setState(prev => {
+        return {
+          ...prev,
+          appointments
+        }
+      }));
   };
-  function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
+
+  const cancelInterview = (id) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview:null
     };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+
+    return axios.delete(`/api/appointments/${id}`)
+    .then(res => {
+      setState(prev => {
+        return {
+          ...prev,
+          appointments
+        }
+      })
+    })
   }
+
+
+  // function save(name, interviewer) {
+  //   const interview = {
+  //     student: name,
+  //     interviewer
+  //   };
+  // }
 
   return (
     <main className="layout">
@@ -107,8 +126,9 @@ const dailyAppointments = getAppointmentsForDay(state, state.day);
               id={appointment.id}
               time={appointment.time}
               interview={interview}
-              interviewers={state, state.interviewers}
+              interviewers={getInterviewersForDay(state, state.day)}
               bookInterview={bookInterview}
+              cancelInterview={cancelInterview}  
               />
           );
           

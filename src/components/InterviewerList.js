@@ -4,6 +4,11 @@ import InterviewerListItem from "./InterviewerListItem";
 import PropTypes from "prop-types";
 
 export default function InterviewerList(props) {
+
+  InterviewerList.propTypes = {
+    interviewers: PropTypes.array.isRequired
+  }
+
 // check if interviewers are truthy.
   const interviewerListItems = props.interviewers && props.interviewers.map(interviewer => {
     return (

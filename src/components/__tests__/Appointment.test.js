@@ -1,11 +1,12 @@
 import React from "react";
-import {render} from "@testing-library/react";
-import Application from "components/Application";
-import { describe } from "yargs";
+import {render, cleanup} from "@testing-library/react";
+import Appointment from "components/Application";
+
+afterEach(cleanup);
 
 // initial test to see that it runs
 describe("Appointment", () => {
 it("renders without crashing", () => {
-  render(<Application />)
+  render(<Appointment />)
 })
 });

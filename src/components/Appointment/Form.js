@@ -26,6 +26,7 @@ const cancel = () => {
         className="appointment__create-input text--semi-bold"
         name="name"
         type="text"
+        data-testid="student-name-input"
         value={name}
         placeholder="Enter Student Name"
         onChange={(e) => setName(e.target.value)}

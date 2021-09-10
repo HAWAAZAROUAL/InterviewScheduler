@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import axios from "axios";
 import DayList from "components/DayList.js";
 import Appointment from "components/Appointment";
 import {getAppointmentsForDay, getInterview, getInterviewersForDay} from "helpers/selectors";
 import "./Application.scss";
 import useApplicationData from "hooks/useApplicationData";
-import cancelInterview from "hooks/useApplicationData";
 
 
 
@@ -16,7 +14,7 @@ export default function Application(props) {
     state,
     setDay,
     bookInterview,
-    // deleteInterview
+    cancelInterview
   } = useApplicationData();
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);

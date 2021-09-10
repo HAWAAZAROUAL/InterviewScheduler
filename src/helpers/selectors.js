@@ -47,4 +47,27 @@ function getInterviewersForDay(state, dayName) {
     return interviewers; 
 };
 
-export {getAppointmentsForDay, getInterview, getInterviewersForDay};
+// Function to count empty spots
+
+const countEmptySpots = (appointments, day) => {
+  let emptySpots = 0;
+for (const appointment of day.appointments) {
+  if (appointments[appointment].interview === null) {
+    emptySpots ++;
+  }
+}
+return emptySpots;
+}
+
+// Function to update Spots
+
+const updateSpots = function(state, appointments) {
+  const days = [...state.days];
+  const day = {...days.find(day => day.name === state.day)};
+  day.spots = countEmptySpots(appointments, days);
+  days.splice(day.id -1, 1, day);
+
+  return days;
+}
+
+export {getAppointmentsForDay, getInterview, getInterviewersForDay, countEmptySpots, updateSpots};

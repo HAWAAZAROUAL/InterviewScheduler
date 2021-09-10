@@ -10,7 +10,6 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
 // import { props } from "bluebird";
-import useApplicationData from "hooks/useApplicationData";
 
 export default function Appointment(props) {
 const EMPTY = "EMPTY";

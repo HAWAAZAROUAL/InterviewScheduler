@@ -1,7 +1,8 @@
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
-
+//fake data
 const state = {
+
   days: [
     {
       id: 1,
@@ -16,6 +17,7 @@ const state = {
       interviewers: [1, 2]
     }
   ],
+
   appointments: {
     "1": { id: 1, time: "12pm", interview: null },
     "2": { id: 2, time: "1pm", interview: null },
@@ -30,9 +32,23 @@ const state = {
       time: "4pm",
       interview: { student: "Chad Takahashi", interviewer: 2 }
     }
+  },
+
+  interviewers: {
+    "1": {  
+      "id": 1,
+      "name": "Sylvia Palmer",
+      "avatar": "https://i.imgur.com/LpaY82x.png"
+    },
+    "2": {
+      id: 2,
+      name: "Tori Malcolm",
+      avatar: "https://i.imgur.com/Nmx0Qxo.png"
+    }
   }
 };
 
+// Tests for getAppointmentsForDay
 test("getAppointmentsForDay returns an array", () => {
   const result = getAppointmentsForDay(state, "Monday");
   expect(Array.isArray(result)).toBe(true);
@@ -59,22 +75,7 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
   expect(result.length).toEqual(0);
 });
 
-// Tests for getInterview Function
-// mock data first
-const interviewers = {
-  "1": {  
-    "id": 1,
-    "name": "Sylvia Palmer",
-    "avatar": "https://i.imgur.com/LpaY82x.png"
-  },
-  "2": {
-    id: 2,
-    name: "Tori Malcolm",
-    avatar: "https://i.imgur.com/Nmx0Qxo.png"
-  }
-}
-
-// Now the tests
+// Tests for getInterview
 test("getInterview returns an object with the interviewer data", () => {
   const result = getInterview(state, state.appointments["3"].interview);
   expect(result).toEqual(
@@ -93,6 +94,7 @@ test("getInterview returns null if no interview is booked", () => {
   const result = getInterview(state, state.appointments["2"].interview);
   expect(result).toBeNull();
 });
+
 
 // tests for getInterviewersForDay
 

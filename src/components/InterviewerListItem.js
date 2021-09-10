@@ -5,8 +5,6 @@ import classnames from "classnames";
 
 export default function InterviewerListItem(props) {
 
-const { name, avatar, selected, setInterviewer} = props;
-
 const interviewerClass = classnames ("interviewers__item", {
 "interviewers__item--selected": props.selected
 });
@@ -23,19 +21,7 @@ return (
   src={props.avatar}
   alt={props.name}
 />
-
 {props.selected && props.name}
 </li>
   );
 }
-
-
-// const updateSpots = function (state, appointments) {
-
-//   //get the days
-//   //calculate the spots
-//   // update the day
-//   // put day in days array
-//   //  return days array
-//   return []
-// }

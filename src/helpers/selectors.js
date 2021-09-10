@@ -12,7 +12,7 @@ const dailyAppointments = [];
      // this will find the object with that name, and push it into the dailyappt array
       day.appointments.forEach(appointment => {
         dailyAppointments.push(state.appointments[appointment]);
-      })
+      });
 
     }
   });
@@ -44,7 +44,6 @@ function getInterviewersForDay(state, dayName) {
       });
     }
   });
-  console.log('interviewers: ', interviewers);
     return interviewers; 
 };
 

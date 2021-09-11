@@ -1,4 +1,8 @@
 # Interview Scheduler
+###### The Scheduler app allows users to create interview appointments by choosing their time slot, entering their name, and selecting the interviewer they want from a list. Furthermore, users can edit and cancel any interviews they previously created.
+
+## A peak at the app!
+
 
 ## Setup
 

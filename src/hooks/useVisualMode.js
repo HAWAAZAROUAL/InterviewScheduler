@@ -18,11 +18,9 @@ const transition = (newMode, replace = false) => {
 const back = () => {
   if (history.length > 1) {
 
-    // use slice to get ride of last item without mutating original array
     const secondLastItem = history[history.length - 2];
     setHistory(history.slice(0, -1));
 
-    // can console.log secondLastItem
   }
 }
 return {mode, transition, back};

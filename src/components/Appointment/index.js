@@ -28,7 +28,7 @@ const { mode, transition, back } = useVisualMode(
 );
 
 const save = (name, interviewer) => {
-  // newly created interview
+    
   const interview = {
     student: name,
     interviewer: interviewer.id
@@ -39,7 +39,10 @@ const save = (name, interviewer) => {
   props.bookInterview(props.id, interview)
     .then(() => transition(SHOW))
     .catch(() => transition(ERROR_SAVE, true));
-}
+};
+
+
+// ---------------------------------- cancel function ------------------------ //
 
 const cancel = apptId => {
 
@@ -49,57 +52,128 @@ const cancel = apptId => {
     .then(() => transition(EMPTY))
     .catch(() => transition(ERROR_DELETE, true));
 
-} 
+}; 
+ 
+
+// ------------------------- Appointment component -------------------------- //
 
 return (
 
-<article className="appointment">
-{/* conditional rendering with ternary operator */}
-<Header time={props.time} />
+  <article className="appointment">
+    <Header time={props.time} />
+    {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+    {mode === SHOW && ( <Show 
+                          student={props.interview.student} 
+                          interviewer={props.interview.interviewer}
+                          onDelete={() => transition(CONFIRM)}
+                          onEdit={() => transition(EDIT)} 
+                          /> )} 
+    {mode === CREATE && <Form 
+                          interviewers={props.interviewers} 
+                          onCancel={() => back()} 
+                          onSave={save} />}       
+    {mode === SAVING && <Status message="Saving"/>}
+    {mode === CANCELLING && <Status message="Deleting"/>}  
+    {mode === CONFIRM && <Confirm
+                            message="are you sure you want to cancel this appointment?"
+                            onConfirm={cancel}
+                            onCancel={() => back()} />}     
+    {mode === EDIT && <Form 
+                        interviewers={props.interviewers} 
+                        onCancel={() => back()} 
+                        onSave={save}
+                        name={props.interview.student}
+                        interviewer={props.interview.interviewer} />}             
 
-{mode === EMPTY && 
-<Empty 
-  onAdd={() => transition(CREATE)} />}
-{mode === SHOW && ( 
-<Show 
-student = {props.interview.student}
-interviewer={props.interview.interviewer} 
-onDelete={() => transition(CONFIRM)}
-onEdit={() => transition(EDIT)}
-  />)}
-{mode === CREATE && 
-<Form 
-interviewers={props.interviewers} 
-onCancel={() => back()}
-onSave={save}
-/>}
+    {mode === ERROR_DELETE && <Error
+                                onClose={() => back()}
+                                message="Could not delete appointment." />} 
+    {mode === ERROR_SAVE && <Error 
+                              onClose={() => back()}
+                              message="Could not save the appointment" />}
+  </article>
 
-{mode === SAVING && <Status message="saving..."/>}
-{mode === CANCELLING && <Status message="cancelling..."/>}
-{mode === CONFIRM && <Confirm 
-message="Confirming a change is undoable, are you sure?"
-onConfirm={cancel} 
-onCancel={() => back()}
-/>}
-
-{mode === EDIT && <Form 
-interviewers={props.interviewers}
-onCancel={() => back()}
-onSave={save}
-name={props.interview.student}
-interviewer={props.interview.interviewer}
-/>}
-
-{mode === ERROR_DELETE && <Error 
-onClose={() => back()}
-message="Error, failed to delete appointment."
-/>}
-
-{mode === ERROR_SAVE && <Error onClose={() => back()}
-message="Error, failed to save appointment."
-/>}
-
-</article>
-
-  );
+);
 }
+
+
+
+
+
+
+// const save = (name, interviewer) => {
+//   // newly created interview
+//   const interview = {
+//     student: name,
+//     interviewer: interviewer.id
+//   };
+
+//   transition(SAVING);
+
+//   props.bookInterview(props.id, interview)
+//     .then(() => transition(SHOW))
+//     .catch(() => transition(ERROR_SAVE, true));
+// }
+
+// const cancel = apptId => {
+
+//   transition(CANCELLING, true);
+
+//   props.cancelInterview(props.id)
+//     .then(() => transition(EMPTY))
+//     .catch(() => transition(ERROR_DELETE, true));
+
+// } 
+
+// return (
+
+// <article className="appointment">
+// {/* conditional rendering with ternary operator */}
+// <Header time={props.time} />
+
+// {mode === EMPTY && 
+// <Empty 
+//   onAdd={() => transition(CREATE)} />}
+// {mode === SHOW && ( 
+// <Show 
+// student = {props.interview.student}
+// interviewer={props.interview.interviewer} 
+// onDelete={() => transition(CONFIRM)}
+// onEdit={() => transition(EDIT)}
+//   />)}
+// {mode === CREATE && 
+// <Form 
+// interviewers={props.interviewers} 
+// onCancel={() => back()}
+// onSave={save}
+// />}
+
+// {mode === SAVING && <Status message="saving..."/>}
+// {mode === CANCELLING && <Status message="cancelling..."/>}
+// {mode === CONFIRM && <Confirm 
+// message="Confirming a change is undoable, are you sure?"
+// onConfirm={cancel} 
+// onCancel={() => back()}
+// />}
+
+// {mode === EDIT && <Form 
+// interviewers={props.interviewers}
+// onCancel={() => back()}
+// onSave={save}
+// name={props.interview.student}
+// interviewer={props.interview.interviewer}
+// />}
+
+// {mode === ERROR_DELETE && <Error 
+// onClose={() => back()}
+// message="Error, failed to delete appointment."
+// />}
+
+// {mode === ERROR_SAVE && <Error onClose={() => back()}
+// message="Error, failed to save appointment."
+// />}
+
+// </article>
+
+//   );
+// }

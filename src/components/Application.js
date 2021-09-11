@@ -1,3 +1,4 @@
+
 import React from "react";
 import DayList from "components/DayList.js";
 import Appointment from "components/Appointment";
@@ -17,7 +18,10 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
+  console.log('state:', state);
+  
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+  // const setDays = days => setState(prev => ({ ...prev, days }));
 
 
   return (
@@ -31,8 +35,8 @@ export default function Application(props) {
 <hr className="sidebar__separator sidebar--centered" />
 <nav className="sidebar__menu">
 <DayList
-  days={state.days}
   day={state.day}
+  days={state.days}
   setDay={setDay}
 />
 </nav>

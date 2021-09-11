@@ -3,7 +3,7 @@ import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
 export default function Form(props) {
-  // make the states for interviewer and name
+  // make the  default states for interviewer and name
 const [name, setName] = useState(props.name || "");
 const [interviewer, setInterviewer] = useState(props.interviewer || null);
 const [error, setError] = useState("");
@@ -12,11 +12,13 @@ const [error, setError] = useState("");
 const reset = () => {
   setName("");
   setInterviewer(null);
+  setError("");
 };
 
 // cancel function
 const cancel = () => {
   reset();
+  setError("");
   props.onCancel();
 }
 
@@ -26,6 +28,11 @@ const validate = () => {
     setError("You must write a name, no blanks please.");
     return;
   }
+  if (interviewer === null) {
+    setError("An interviewer must be selected.");
+    return;
+  }
+  setError("");
   props.onSave(name, interviewer);
 }
   return (

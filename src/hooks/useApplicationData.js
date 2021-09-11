@@ -83,7 +83,11 @@ function useApplicationData() {
       })
     })
   }
-
+  console.log("state: ", state);
+return {state, setDay, bookInterview, cancelInterview};
 }
 
 export default useApplicationData;
+
+
+// use curly brackets to return it as an object - this avoids typeError

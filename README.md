@@ -3,6 +3,11 @@
 
 ## A peak at the app!
 
+!["First image of scheduler app"] (https://github.com/HAWAAZAROUAL/InterviewScheduler/blob/master/docs/Scheduler1.png?raw=true)
+
+!["Second image of scheduler app"] (https://github.com/HAWAAZAROUAL/InterviewScheduler/blob/master/docs/Scheduler2.png?raw=true)
+
+!["Third image of scheduler app"] (https://github.com/HAWAAZAROUAL/InterviewScheduler/blob/master/docs/Scheduler3.png?raw=true)
 
 ## Setup
 
